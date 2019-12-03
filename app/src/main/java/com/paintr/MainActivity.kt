@@ -11,7 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val canvasCustomView = CanvasCustomView(this)
-        canvasCustomView.contentDescription = getString(R.string.canvasContentDescription)
         setContentView(canvasCustomView)
     }
 
