@@ -3,6 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/colorCanvas"
+        android:title="@string/color_menu_caps"
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/colorRed"
+                android:title="@string/color_red" />
+            <item
+                android:id="@+id/colorGreen"
+                android:title="@string/color_green" />
+            <item
+                android:id="@+id/colorBlack"
+                android:title="@string/color_black" />
+            <item
+                android:id="@+id/colorOrange"
+                android:title="@string/color_orange" />
+            <item
+                android:id="@+id/colorBrown"
+                android:title="@string/color_brown" />
+        </menu>
+    </item>
+
+    <item
         android:id="@+id/resetCanvas"
         android:title="@string/reset_menu_caps"
         app:showAsAction="always" />

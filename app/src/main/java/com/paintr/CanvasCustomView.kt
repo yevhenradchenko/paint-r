@@ -3,6 +3,7 @@ package com.paintr
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
@@ -21,8 +22,6 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
 
     private val extraCanvas: Canvas? = null
 
-    private val drawColor = ResourcesCompat.getColor(resources, R.color.colorPaint, null)
-
     private var motionTouchEventX = 0f
     private var motionTouchEventY = 0f
 
@@ -32,7 +31,7 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     private val touchTolerance = ViewConfiguration.get(context).scaledTouchSlop
 
     private val paint = Paint().apply {
-        color = drawColor
+        color = ResourcesCompat.getColor(resources, R.color.colorBlack, null)
         isAntiAlias = true
         isDither = true
         style = Paint.Style.STROKE
@@ -41,18 +40,22 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
         strokeWidth = STROKE_WIDTH
     }
 
+    fun setDrawingColor(color: Int){
+        paint.color = color
+    }
+
     fun resetCanvasDrawing() {
-        extraCanvas?.drawColor(0, PorterDuff.Mode.CLEAR)
-        path.reset()
+        path.reset() // Avoiding saving redo from Path()
+        paths.clear()
         invalidate()
     }
 
     fun undoCanvasDrawing() {
-        if (undonePaths.size > 0) {
-            paths.add(paths.removeAt(paths.size - 1))
+        if (paths.size > 0) {
+            undonePaths.add(paths.removeAt(paths.size - 1))
             invalidate()
         } else {
-
+            Log.d("UNDO_ERROR", "Something went wrong with UNDO action")
         }
     }
 
@@ -61,18 +64,14 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
             paths.add(undonePaths.removeAt(undonePaths.size - 1))
             invalidate()
         } else {
-
+            Log.d("REDO_ERROR", "Something went wrong with REDO action")
         }
-    }
-
-    override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
-        super.onSizeChanged(width, height, oldWidth, oldHeight)
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        for (Path in paths) {
-            canvas?.drawPath(Path, paint)
+        for (p in paths) {
+            canvas?.drawPath(p, paint)
         }
         canvas?.drawPath(path, paint)
     }
@@ -93,9 +92,11 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
                 currentY = motionTouchEventY
                 invalidate()
             }
+
             MotionEvent.ACTION_MOVE -> {
                 val distanceX = abs(motionTouchEventX - currentX)
                 val distanceY = abs(motionTouchEventY - currentY)
+
                 if (distanceX >= touchTolerance || distanceY >= touchTolerance) {
                     path.quadTo(
                         currentX,
@@ -107,6 +108,7 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
                 }
                 invalidate()
             }
+
             MotionEvent.ACTION_UP -> {
                 path.lineTo(currentX, currentY)
                 extraCanvas?.drawPath(path, paint)

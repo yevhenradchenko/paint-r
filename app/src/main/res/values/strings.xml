@@ -3,4 +3,11 @@
     <string name="reset_menu_caps">RESET</string>
     <string name="undo_menu_caps">UNDO</string>
     <string name="redo_menu_caps">REDO</string>
+    <string name="color_menu_caps">COLOR</string>
+
+    <string name="color_red">Red</string>
+    <string name="color_green">Green</string>
+    <string name="color_black">Black</string>
+    <string name="color_orange">Orange</string>
+    <string name="color_brown">Brown</string>
 </resources>
