@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,11 @@ class MainActivity : AppCompatActivity() {
             R.id.resetCanvas -> canvasCustomView.resetCanvasDrawing()
             R.id.undoCanvas -> canvasCustomView.undoCanvasDrawing()
             R.id.redoCanvas -> canvasCustomView.redoCanvasDrawing()
+            R.id.colorRed -> canvasCustomView.setDrawingColor(ContextCompat.getColor(this, R.color.colorRed))
+            R.id.colorGreen -> canvasCustomView.setDrawingColor(ContextCompat.getColor(this, R.color.colorGreen))
+            R.id.colorBlack -> canvasCustomView.setDrawingColor(ContextCompat.getColor(this, R.color.colorBlack))
+            R.id.colorOrange -> canvasCustomView.setDrawingColor(ContextCompat.getColor(this, R.color.colorOrange))
+            R.id.colorBrown -> canvasCustomView.setDrawingColor(ContextCompat.getColor(this, R.color.colorBrown))
         }
         return super.onOptionsItemSelected(item)
     }
