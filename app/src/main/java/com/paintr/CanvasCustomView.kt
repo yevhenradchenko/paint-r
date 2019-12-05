@@ -56,6 +56,7 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     fun clearCanvas() {
         extraCanvas.drawColor(0, PorterDuff.Mode.CLEAR)
         path.reset()
+        invalidate()
     }
 
     private val backgroundColor = ResourcesCompat.getColor(resources, R.color.colorBackground, null)
