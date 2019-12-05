@@ -43,7 +43,6 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     }
 
     private fun touchStart() {
-        undonePaths.clear()
         path.reset()
         path.moveTo(motionTouchEventX, motionTouchEventY)
         currentX = motionTouchEventX
@@ -69,10 +68,7 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     }
 
     private fun touchUp() {
-        path.lineTo(currentX, currentY)
-        extraCanvas.drawPath(path, paint)
-        path = Path()
-        invalidate()
+        path.reset()
     }
 
     fun resetCanvasDrawing() {
@@ -82,21 +78,9 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     }
 
     fun undoCanvasDrawing() {
-        if (paths.size > 0) {
-            undonePaths.add(paths.removeAt(paths.size - 1))
-            invalidate()
-        } else {
-
-        }
     }
 
     fun redoCanvasDrawing() {
-        if (paths.size > 0) {
-            paths.add(undonePaths.removeAt(undonePaths.size - 1))
-            invalidate()
-        } else {
-
-        }
     }
 
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
@@ -112,9 +96,6 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        for (Path in paths) {
-            canvas?.drawBitmap(extraBitmap, 0f, 0f, null)
-        }
         canvas?.drawBitmap(extraBitmap, 0f, 0f, null)
     }
 
