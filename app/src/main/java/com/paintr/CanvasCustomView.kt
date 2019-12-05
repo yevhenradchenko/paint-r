@@ -1,10 +1,8 @@
 package com.paintr
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
+import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
@@ -13,7 +11,7 @@ import kotlin.math.abs
 
 private const val STROKE_WIDTH = 12f
 
-class CanvasCustomView(context: Context) : View(context) {
+class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
     private var path = Path()
 
     private lateinit var extraCanvas: Canvas
@@ -52,6 +50,11 @@ class CanvasCustomView(context: Context) : View(context) {
     }
 
     private fun touchUp() {
+        path.reset()
+    }
+
+    fun clearCanvas() {
+        extraCanvas.drawColor(0, PorterDuff.Mode.CLEAR)
         path.reset()
     }
 
