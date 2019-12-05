@@ -20,7 +20,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-                R.id.resetCanvas -> canvasCustomView.clearCanvas()
+            R.id.resetCanvas -> canvasCustomView.resetCanvasDrawing()
+            R.id.undoCanvas -> canvasCustomView.undoCanvasDrawing()
+            R.id.redoCanvas -> canvasCustomView.redoCanvasDrawing()
         }
         return super.onOptionsItemSelected(item)
     }
