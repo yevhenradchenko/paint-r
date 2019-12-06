@@ -1,7 +1,9 @@
 package com.paintr
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Path
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -10,13 +12,19 @@ import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
 import kotlin.math.abs
 
+
 class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
     companion object {
         private const val STROKE_WIDTH = 12f
     }
 
-    private var path = Path()
+    override fun isSaveEnabled(): Boolean {
+        return true
+    }
+
     var drawColor : Int = ResourcesCompat.getColor(resources, R.color.colorBlack, null)
+
+    private var path = Path()
 
     private val paths = ArrayList<Pair<Path, Int>>()
     private val undonePaths = ArrayList<Pair<Path, Int>>()
@@ -118,3 +126,4 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
         return true
     }
 }
+
