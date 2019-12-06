@@ -16,9 +16,10 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     }
 
     private var path = Path()
+    var drawColor : Int = ResourcesCompat.getColor(resources, R.color.colorBlack, null)
 
-    private val paths = ArrayList<Path>()
-    private val undonePaths = ArrayList<Path>()
+    private val paths = ArrayList<Pair<Path, Int>>()
+    private val undonePaths = ArrayList<Pair<Path, Int>>()
 
     private val extraCanvas: Canvas? = null
 
@@ -31,7 +32,7 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     private val touchTolerance = ViewConfiguration.get(context).scaledTouchSlop
 
     private val paint = Paint().apply {
-        color = ResourcesCompat.getColor(resources, R.color.colorBlack, null)
+        color = drawColor
         isAntiAlias = true
         isDither = true
         style = Paint.Style.STROKE
@@ -40,12 +41,8 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
         strokeWidth = STROKE_WIDTH
     }
 
-    fun setDrawingColor(color: Int){
-        paint.color = color
-    }
-
     fun resetCanvasDrawing() {
-        path.reset() // Avoiding saving redo from Path()
+        path.reset()
         paths.clear()
         invalidate()
     }
@@ -71,8 +68,10 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         for (p in paths) {
-            canvas?.drawPath(p, paint)
+            paint.color = p.second
+            canvas?.drawPath(p.first, paint)
         }
+        paint.color = drawColor
         canvas?.drawPath(path, paint)
     }
 
@@ -112,7 +111,7 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
             MotionEvent.ACTION_UP -> {
                 path.lineTo(currentX, currentY)
                 extraCanvas?.drawPath(path, paint)
-                paths.add(path)
+                paths.add(path to drawColor)
                 path = Path()
             }
         }
