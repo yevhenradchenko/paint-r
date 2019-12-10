@@ -3,6 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/brushSizeCanvas"
+        android:icon="@drawable/ic_brush_black_24dp"
+        android:title="@string/brush_menu_caps"
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/size12"
+                android:title="@string/brush_size_12" />
+            <item
+                android:id="@+id/size14"
+                android:title="@string/brush_size_14" />
+            <item
+                android:id="@+id/size16"
+                android:title="@string/brush_size_16" />
+            <item
+                android:id="@+id/size18"
+                android:title="@string/brush_size_18" />
+            <item
+                android:id="@+id/size20"
+                android:title="@string/brush_size_20" />
+            <item
+                android:id="@+id/size24"
+                android:title="@string/brush_size_24" />
+        </menu>
+
+    </item>
+
+    <item
         android:id="@+id/openCanvas"
         android:title="@string/open_menu_caps" />
     <item
@@ -11,13 +40,13 @@
 
     <item
         android:id="@+id/shareCanvas"
-        android:title="@string/share_menu_caps"
-        android:icon="@drawable/ic_share_black_24dp" />
+        android:icon="@drawable/ic_share_black_24dp"
+        android:title="@string/share_menu_caps" />
 
     <item
         android:id="@+id/colorCanvas"
-        android:title="@string/color_menu_caps"
         android:icon="@drawable/ic_color_lens_black_24dp"
+        android:title="@string/color_menu_caps"
         app:showAsAction="always">
 
         <menu>
@@ -45,13 +74,13 @@
 
     <item
         android:id="@+id/undoCanvas"
-        android:title="@string/undo_menu_caps"
         android:icon="@drawable/ic_undo_black_24dp"
+        android:title="@string/undo_menu_caps"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/redoCanvas"
-        android:title="@string/redo_menu_caps"
         android:icon="@drawable/ic_redo_black_24dp"
+        android:title="@string/redo_menu_caps"
         app:showAsAction="always" />
 </menu>

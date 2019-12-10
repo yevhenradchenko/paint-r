@@ -4,6 +4,7 @@
         <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="listPreferredItemHeightSmall">35dp</item>
     </style>
 
     <style name="ToolbarTheme">

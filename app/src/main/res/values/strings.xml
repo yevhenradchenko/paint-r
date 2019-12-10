@@ -7,10 +7,18 @@
     <string name="save_menu_caps">SAVE</string>
     <string name="open_menu_caps">OPEN</string>
     <string name="share_menu_caps">SHARE</string>
+    <string name="brush_menu_caps">BRUSH</string>
 
     <string name="color_red">Red</string>
     <string name="color_green">Green</string>
     <string name="color_black">Black</string>
     <string name="color_orange">Orange</string>
     <string name="color_brown">Brown</string>
+
+    <string name="brush_size_12">12</string>
+    <string name="brush_size_14">14</string>
+    <string name="brush_size_16">16</string>
+    <string name="brush_size_18">18</string>
+    <string name="brush_size_20">20</string>
+    <string name="brush_size_24">24</string>
 </resources>

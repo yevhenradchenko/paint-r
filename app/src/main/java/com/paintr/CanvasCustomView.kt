@@ -19,11 +19,12 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     }
 
     var drawColor : Int = ResourcesCompat.getColor(resources, R.color.colorBlack, null)
+    var strokeDrawWidth: Float = 12f
 
     private var path = Path()
 
-    private val paths = ArrayList<Pair<Path, Int>>()
-    private val undonePaths = ArrayList<Pair<Path, Int>>()
+    private val paths = ArrayList<Triple<Path, Int, Float>>()
+    private val undonePaths = ArrayList<Triple<Path, Int, Float>>()
 
     private val extraCanvas: Canvas? = null
 
@@ -42,7 +43,7 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
         style = Paint.Style.STROKE
         strokeJoin = Paint.Join.ROUND
         strokeCap = Paint.Cap.ROUND
-        strokeWidth = STROKE_WIDTH
+        strokeWidth = strokeDrawWidth
     }
 
     fun resetCanvasDrawing() {
@@ -72,10 +73,12 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         for (p in paths) {
+            paint.strokeWidth = p.third
             paint.color = p.second
             canvas?.drawPath(p.first, paint)
         }
         paint.color = drawColor
+        paint.strokeWidth = strokeDrawWidth
         canvas?.drawPath(path, paint)
     }
 
