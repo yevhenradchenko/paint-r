@@ -10,6 +10,9 @@
 
         <menu>
             <item
+                android:id="@+id/size10"
+                android:title="@string/brush_size_10" />
+            <item
                 android:id="@+id/size12"
                 android:title="@string/brush_size_12" />
             <item

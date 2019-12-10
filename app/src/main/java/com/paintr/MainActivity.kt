@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             R.id.colorOrange -> canvasCustomView.drawColor =ContextCompat.getColor(this, R.color.colorOrange)
             R.id.colorBrown -> canvasCustomView.drawColor =ContextCompat.getColor(this, R.color.colorBrown)
 
+            R.id.size10 -> canvasCustomView.strokeDrawWidth = 10f
             R.id.size12 -> canvasCustomView.strokeDrawWidth = 12f
             R.id.size14 -> canvasCustomView.strokeDrawWidth = 14f
             R.id.size16 -> canvasCustomView.strokeDrawWidth = 16f
