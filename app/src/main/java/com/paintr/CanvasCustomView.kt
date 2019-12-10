@@ -18,10 +18,6 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
         private const val STROKE_WIDTH = 12f
     }
 
-    override fun isSaveEnabled(): Boolean {
-        return true
-    }
-
     var drawColor : Int = ResourcesCompat.getColor(resources, R.color.colorBlack, null)
 
     private var path = Path()
@@ -123,6 +119,10 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
                 path = Path()
             }
         }
+        return true
+    }
+
+    override fun isSaveEnabled(): Boolean {
         return true
     }
 }

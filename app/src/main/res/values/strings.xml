@@ -4,6 +4,9 @@
     <string name="undo_menu_caps">UNDO</string>
     <string name="redo_menu_caps">REDO</string>
     <string name="color_menu_caps">COLOR</string>
+    <string name="save_menu_caps">SAVE</string>
+    <string name="open_menu_caps">OPEN</string>
+    <string name="share_menu_caps">SHARE</string>
 
     <string name="color_red">Red</string>
     <string name="color_green">Green</string>
