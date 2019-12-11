@@ -13,11 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity() {
     companion object {
         private const val PERMISSIONS_REQUEST_CODE = 101
+        private const val GALLERY_REQUEST_CODE = 102
+
         private lateinit var managePermissions: ManagePermissions
+
         private val PERMISSIONS = listOf<String>(
             Manifest.permission.INTERNET,
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             R.id.undoCanvas -> canvasCustomView.undoCanvasDrawing()
             R.id.redoCanvas -> canvasCustomView.redoCanvasDrawing()
             R.id.shareCanvas -> {
-                val drawedBitmap  = "TEXT TO SHARE"
+                val drawedBitmap = "TEXT TO SHARE"
 
                 val intent = Intent()
                 intent.action = Intent.ACTION_SEND
@@ -62,6 +64,10 @@ class MainActivity : AppCompatActivity() {
             } else {
                 canvasCustomView.saveCanvasDrawing()
                 toast("Saved!")
+            }
+
+            R.id.openCanvas -> {
+                pickFromGallery()
             }
 
             R.id.colorRed -> canvasCustomView.drawingColor = ContextCompat.getColor(this, R.color.colorRed)
@@ -89,6 +95,14 @@ class MainActivity : AppCompatActivity() {
                 canvasCustomView.saveCanvasDrawing()
             }
         }
+    }
+
+    private fun pickFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        val imageTypes = arrayOf("image/jpeg", "image/png")
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, imageTypes)
+        startActivityForResult(intent, GALLERY_REQUEST_CODE)
     }
 }
 

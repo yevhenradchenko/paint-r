@@ -124,8 +124,7 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
                         currentX,
                         currentY,
                         (motionTouchEventX + currentX) / 2,
-                        (currentY + motionTouchEventY) / 2
-                    )
+                        (currentY + motionTouchEventY) / 2)
                     currentX = motionTouchEventX
                     currentY = motionTouchEventY
                 }
