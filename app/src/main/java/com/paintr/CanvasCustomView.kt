@@ -1,20 +1,23 @@
 package com.paintr
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
+import android.provider.MediaStore
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlin.math.abs
 
 
 class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
-    var drawColor : Int = ResourcesCompat.getColor(resources, R.color.colorBlack, null)
+    var drawColor: Int = ResourcesCompat.getColor(resources, R.color.colorBlack, null)
     var strokeDrawWidth: Float = 12f
 
     private var path = Path()
@@ -40,6 +43,15 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
         strokeJoin = Paint.Join.ROUND
         strokeCap = Paint.Cap.ROUND
         strokeWidth = strokeDrawWidth
+    }
+
+    fun openImageAsCanvasBackground() {
+    }
+
+    fun saveCanvasDrawing() {
+        canvasCustomView.isDrawingCacheEnabled = true
+        val extraBitmap: Bitmap = canvasCustomView.drawingCache
+        MediaStore.Images.Media.insertImage(context.contentResolver, extraBitmap, "Jeka.jpg", "new image")
     }
 
     fun resetCanvasDrawing() {
@@ -104,7 +116,8 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
                         currentX,
                         currentY,
                         (motionTouchEventX + currentX) / 2,
-                        (currentY + motionTouchEventY) / 2)
+                        (currentY + motionTouchEventY) / 2
+                    )
                     currentX = motionTouchEventX
                     currentY = motionTouchEventY
                 }
