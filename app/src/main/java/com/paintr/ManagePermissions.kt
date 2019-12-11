@@ -5,7 +5,9 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
-class ManagePermissions(val activity: MainActivity, val PERMISSIONS: List<String>, val PERMISSIONS_REQUEST_CODE: Int) {
+class ManagePermissions(private val activity: MainActivity,
+                        private val PERMISSIONS: List<String>,
+                        private val PERMISSIONS_REQUEST_CODE: Int) {
 
     fun checkPermissions() {
         if (isPermissionsGranted() != PackageManager.PERMISSION_GRANTED) {
@@ -37,7 +39,7 @@ class ManagePermissions(val activity: MainActivity, val PERMISSIONS: List<String
         AlertDialog.Builder(activity)
             .setTitle("Need permission(s)")
             .setMessage("Some permissions are required to save, open and share your drawing")
-            .setPositiveButton("Let\'s Go!") { dialog, which -> requestPermissions() }
+            .setPositiveButton("OK") { dialog, which -> requestPermissions() }
             .setNegativeButton("Cancel", null)
             .create()
             .show()

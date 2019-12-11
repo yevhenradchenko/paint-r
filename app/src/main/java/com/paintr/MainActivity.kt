@@ -2,6 +2,7 @@ package com.paintr
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -40,21 +41,34 @@ class MainActivity : AppCompatActivity() {
             R.id.resetCanvas -> canvasCustomView.resetCanvasDrawing()
             R.id.undoCanvas -> canvasCustomView.undoCanvasDrawing()
             R.id.redoCanvas -> canvasCustomView.redoCanvasDrawing()
+            R.id.shareCanvas -> {
+                val drawedBitmap  = "TEXT TO SHARE"
+
+                val intent = Intent()
+                intent.action = Intent.ACTION_SEND
+                intent.putExtra(Intent.EXTRA_TEXT, drawedBitmap)
+                intent.type = "text/plain"
+
+                startActivity(Intent.createChooser(intent, "Share to:"))
+            }
+
             R.id.saveCanvas -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (managePermissions.isPermissionsGranted() == PackageManager.PERMISSION_GRANTED) {
                     canvasCustomView.saveCanvasDrawing()
+                    toast("Saved!")
                 } else {
                     managePermissions.checkPermissions()
                 }
             } else {
                 canvasCustomView.saveCanvasDrawing()
+                toast("Saved!")
             }
 
-            R.id.colorRed -> canvasCustomView.drawColor = ContextCompat.getColor(this, R.color.colorRed)
-            R.id.colorGreen -> canvasCustomView.drawColor = ContextCompat.getColor(this, R.color.colorGreen)
-            R.id.colorBlack -> canvasCustomView.drawColor = ContextCompat.getColor(this, R.color.colorBlack)
-            R.id.colorOrange -> canvasCustomView.drawColor = ContextCompat.getColor(this, R.color.colorOrange)
-            R.id.colorBrown -> canvasCustomView.drawColor = ContextCompat.getColor(this, R.color.colorBrown)
+            R.id.colorRed -> canvasCustomView.drawingColor = ContextCompat.getColor(this, R.color.colorRed)
+            R.id.colorGreen -> canvasCustomView.drawingColor = ContextCompat.getColor(this, R.color.colorGreen)
+            R.id.colorBlack -> canvasCustomView.drawingColor = ContextCompat.getColor(this, R.color.colorBlack)
+            R.id.colorOrange -> canvasCustomView.drawingColor = ContextCompat.getColor(this, R.color.colorOrange)
+            R.id.colorBrown -> canvasCustomView.drawingColor = ContextCompat.getColor(this, R.color.colorBrown)
 
             R.id.size10 -> canvasCustomView.strokeDrawWidth = 10f
             R.id.size12 -> canvasCustomView.strokeDrawWidth = 12f

@@ -17,7 +17,7 @@ import kotlin.math.abs
 
 
 class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
-    var drawColor: Int = ResourcesCompat.getColor(resources, R.color.colorBlack, null)
+    var drawingColor: Int = ResourcesCompat.getColor(resources, R.color.colorBlack, null)
     var strokeDrawWidth: Float = 12f
 
     private var path = Path()
@@ -26,6 +26,8 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     private val undonePaths = ArrayList<Triple<Path, Int, Float>>()
 
     private val extraCanvas: Canvas? = null
+
+    private var bitmapBackground: Bitmap? = null
 
     private var motionTouchEventX = 0f
     private var motionTouchEventY = 0f
@@ -36,7 +38,7 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     private val touchTolerance = ViewConfiguration.get(context).scaledTouchSlop
 
     private val paint = Paint().apply {
-        color = drawColor
+        color = drawingColor
         isAntiAlias = true
         isDither = true
         style = Paint.Style.STROKE
@@ -45,13 +47,15 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
         strokeWidth = strokeDrawWidth
     }
 
-    fun openImageAsCanvasBackground() {
+    fun loadCanvasBackground(bitmap: Bitmap) {
+        bitmapBackground = bitmap
+        invalidate()
     }
 
     fun saveCanvasDrawing() {
         canvasCustomView.isDrawingCacheEnabled = true
         val extraBitmap: Bitmap = canvasCustomView.drawingCache
-        MediaStore.Images.Media.insertImage(context.contentResolver, extraBitmap, "Jeka.jpg", "new image")
+        MediaStore.Images.Media.insertImage(context.contentResolver, extraBitmap, "drawing", "Paint R")
     }
 
     fun resetCanvasDrawing() {
@@ -80,12 +84,16 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+        if (bitmapBackground != null) {
+            extraCanvas?.drawBitmap(bitmapBackground!!, 0f, 0f, paint)
+        }
+
         for (p in paths) {
             paint.strokeWidth = p.third
             paint.color = p.second
             canvas?.drawPath(p.first, paint)
         }
-        paint.color = drawColor
+        paint.color = drawingColor
         paint.strokeWidth = strokeDrawWidth
         canvas?.drawPath(path, paint)
     }
@@ -127,7 +135,7 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
             MotionEvent.ACTION_UP -> {
                 path.lineTo(currentX, currentY)
                 extraCanvas?.drawPath(path, paint)
-                paths.add(Triple(path, drawColor, strokeDrawWidth))
+                paths.add(Triple(path, drawingColor, strokeDrawWidth))
                 path = Path()
             }
         }
