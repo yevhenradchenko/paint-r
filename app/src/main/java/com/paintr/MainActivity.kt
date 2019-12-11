@@ -1,9 +1,11 @@
 package com.paintr
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
@@ -23,12 +25,15 @@ class MainActivity : AppCompatActivity() {
         private val PERMISSIONS = listOf<String>(
             Manifest.permission.INTERNET,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setSupportActionBar(canvasToolbar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -43,16 +48,7 @@ class MainActivity : AppCompatActivity() {
             R.id.resetCanvas -> canvasCustomView.resetCanvasDrawing()
             R.id.undoCanvas -> canvasCustomView.undoCanvasDrawing()
             R.id.redoCanvas -> canvasCustomView.redoCanvasDrawing()
-            R.id.shareCanvas -> {
-                val drawedBitmap = "TEXT TO SHARE"
-
-                val intent = Intent()
-                intent.action = Intent.ACTION_SEND
-                intent.putExtra(Intent.EXTRA_TEXT, drawedBitmap)
-                intent.type = "text/plain"
-
-                startActivity(Intent.createChooser(intent, "Share to:"))
-            }
+            R.id.shareCanvas -> {}
 
             R.id.saveCanvas -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (managePermissions.isPermissionsGranted() == PackageManager.PERMISSION_GRANTED) {
@@ -103,6 +99,35 @@ class MainActivity : AppCompatActivity() {
         val imageTypes = arrayOf("image/jpeg", "image/png")
         intent.putExtra(Intent.EXTRA_MIME_TYPES, imageTypes)
         startActivityForResult(intent, GALLERY_REQUEST_CODE)
+    }
+
+    private fun handleOpenGallery() {
+        val intentSelect = Intent(Intent.ACTION_GET_CONTENT)
+        intentSelect.type = "image/*"
+        startActivityForResult(
+            Intent.createChooser(intentSelect, getString(R.string.picture_select)),
+            GALLERY_REQUEST_CODE
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GALLERY_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                val uri: Uri? = data?.data
+                if (uri != null) {
+                    shareImage(uri)
+                }
+            }
+        }
+    }
+
+    private fun shareImage(imageUri: Uri) {
+        val shareIntent = Intent()
+        shareIntent.action = Intent.ACTION_SEND
+        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
+        shareIntent.type = "image/jpeg"
+        startActivity(Intent.createChooser(shareIntent, "Share to"))
     }
 }
 

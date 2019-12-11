@@ -1,14 +1,10 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="listPreferredItemHeightSmall">35dp</item>
-    </style>
-
-    <style name="ToolbarTheme">
-        <item name="android:background">#464646</item>
+        <item name="android:textColorSecondary">@color/toolbarItemColor</item>
     </style>
 
 </resources>

@@ -22,4 +22,6 @@
     <string name="brush_size_18">18</string>
     <string name="brush_size_20">20</string>
     <string name="brush_size_24">24</string>
+
+    <string name="picture_select">Please select an image: </string>
 </resources>

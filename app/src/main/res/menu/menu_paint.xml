@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
@@ -11,40 +12,35 @@
         <menu>
             <item
                 android:id="@+id/size10"
+                android:icon="@drawable/ic_brush_10dp"
                 android:title="@string/brush_size_10" />
             <item
                 android:id="@+id/size12"
+                android:icon="@drawable/ic_brush_12dp"
                 android:title="@string/brush_size_12" />
             <item
                 android:id="@+id/size14"
+                android:icon="@drawable/ic_brush_14dp"
                 android:title="@string/brush_size_14" />
             <item
                 android:id="@+id/size16"
+                android:icon="@drawable/ic_brush_16dp"
                 android:title="@string/brush_size_16" />
             <item
                 android:id="@+id/size18"
+                android:icon="@drawable/ic_brush_18dp"
                 android:title="@string/brush_size_18" />
             <item
                 android:id="@+id/size20"
+                android:icon="@drawable/ic_brush_20dp"
                 android:title="@string/brush_size_20" />
             <item
                 android:id="@+id/size24"
+                android:icon="@drawable/ic_brush_24dp"
                 android:title="@string/brush_size_24" />
         </menu>
 
     </item>
-
-    <item
-        android:id="@+id/openCanvas"
-        android:title="@string/open_menu_caps" />
-    <item
-        android:id="@+id/saveCanvas"
-        android:title="@string/save_menu_caps" />
-
-    <item
-        android:id="@+id/shareCanvas"
-        android:icon="@drawable/ic_share_black_24dp"
-        android:title="@string/share_menu_caps" />
 
     <item
         android:id="@+id/colorCanvas"
@@ -55,25 +51,26 @@
         <menu>
             <item
                 android:id="@+id/colorRed"
+                android:icon="@drawable/ic_color_red_24dp"
                 android:title="@string/color_red" />
             <item
                 android:id="@+id/colorGreen"
+                android:icon="@drawable/ic_color_green_24dp"
                 android:title="@string/color_green" />
             <item
                 android:id="@+id/colorBlack"
+                android:icon="@drawable/ic_color_black_24dp"
                 android:title="@string/color_black" />
             <item
                 android:id="@+id/colorOrange"
+                android:icon="@drawable/ic_color_orange_24dp"
                 android:title="@string/color_orange" />
             <item
                 android:id="@+id/colorBrown"
+                android:icon="@drawable/ic_color_brown_24dp"
                 android:title="@string/color_brown" />
         </menu>
     </item>
-
-    <item
-        android:id="@+id/resetCanvas"
-        android:title="@string/reset_menu_caps" />
 
     <item
         android:id="@+id/undoCanvas"
@@ -86,4 +83,34 @@
         android:icon="@drawable/ic_redo_black_24dp"
         android:title="@string/redo_menu_caps"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/actionMore"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        android:title=""
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/openCanvas"
+                android:icon="@drawable/ic_open_in_browser_black_24dp"
+                android:title="@string/open_menu_caps" />
+
+            <item
+                android:id="@+id/saveCanvas"
+                android:icon="@drawable/ic_save_black_24dp"
+                android:title="@string/save_menu_caps" />
+
+            <item
+                android:id="@+id/shareCanvas"
+                android:icon="@drawable/ic_share_black_24dp"
+                android:title="@string/share_menu_caps" />
+
+            <item
+                android:id="@+id/resetCanvas"
+                android:icon="@drawable/ic_format_color_reset_black_24dp"
+                android:title="@string/reset_menu_caps" />
+        </menu>
+
+    </item>
 </menu>
