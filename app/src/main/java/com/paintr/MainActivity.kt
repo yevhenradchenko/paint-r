@@ -26,8 +26,7 @@ class MainActivity : AppCompatActivity() {
         private val PERMISSIONS = listOf<String>(
             Manifest.permission.INTERNET,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
+            Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +48,9 @@ class MainActivity : AppCompatActivity() {
             R.id.resetCanvas -> canvasCustomView.resetCanvasDrawing()
             R.id.undoCanvas -> canvasCustomView.undoCanvasDrawing()
             R.id.redoCanvas -> canvasCustomView.redoCanvasDrawing()
-            R.id.shareCanvas -> {}
+            R.id.shareCanvas -> {
+                shareImage()
+            }
 
             R.id.saveCanvas -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (managePermissions.isPermissionsGranted() == PackageManager.PERMISSION_GRANTED) {

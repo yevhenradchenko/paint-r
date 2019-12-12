@@ -93,6 +93,7 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
             paint.color = p.second
             canvas?.drawPath(p.first, paint)
         }
+
         paint.color = drawingColor
         paint.strokeWidth = strokeDrawWidth
         canvas?.drawPath(path, paint)
