@@ -1,6 +1,8 @@
 package com.paintr
 
+import android.R.attr.bitmap
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -52,10 +54,10 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
         invalidate()
     }
 
-    fun saveCanvasDrawing() {
+    fun saveCanvasDrawing() : String {
         canvasCustomView.isDrawingCacheEnabled = true
         val extraBitmap: Bitmap = canvasCustomView.drawingCache
-        MediaStore.Images.Media.insertImage(context.contentResolver, extraBitmap, "drawing", "Paint R")
+        return MediaStore.Images.Media.insertImage(context.contentResolver, extraBitmap, "drawing", "Paint R")
     }
 
     fun resetCanvasDrawing() {

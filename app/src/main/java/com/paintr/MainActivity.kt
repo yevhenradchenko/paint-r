@@ -116,10 +116,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun shareImage(imageUri: Uri) {
+    private fun shareImage() {
+        val uriReceiver = Uri.parse(canvasCustomView.saveCanvasDrawing())
         val shareIntent = Intent()
         shareIntent.action = Intent.ACTION_SEND
-        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uriReceiver)
         shareIntent.type = "image/jpeg"
         startActivity(Intent.createChooser(shareIntent, "Share to"))
     }
