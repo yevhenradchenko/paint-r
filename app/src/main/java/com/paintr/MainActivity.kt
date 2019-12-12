@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -101,22 +102,14 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent, GALLERY_REQUEST_CODE)
     }
 
-    private fun handleOpenGallery() {
-        val intentSelect = Intent(Intent.ACTION_GET_CONTENT)
-        intentSelect.type = "image/*"
-        startActivityForResult(
-            Intent.createChooser(intentSelect, getString(R.string.picture_select)),
-            GALLERY_REQUEST_CODE
-        )
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GALLERY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 val uri: Uri? = data?.data
                 if (uri != null) {
-                    shareImage(uri)
+                    val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+                    canvasCustomView.loadCanvasBackground(bitmap)
                 }
             }
         }

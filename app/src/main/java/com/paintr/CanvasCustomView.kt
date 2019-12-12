@@ -85,7 +85,7 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         if (bitmapBackground != null) {
-            extraCanvas?.drawBitmap(bitmapBackground!!, 0f, 0f, paint)
+            canvas?.drawBitmap(bitmapBackground!!, 0f, 0f, paint)
         }
 
         for (p in paths) {
