@@ -48,7 +48,13 @@ class MainActivity : AppCompatActivity() {
             R.id.resetCanvas -> canvasCustomView.resetCanvasDrawing()
             R.id.undoCanvas -> canvasCustomView.undoCanvasDrawing()
             R.id.redoCanvas -> canvasCustomView.redoCanvasDrawing()
-            R.id.shareCanvas -> {
+            R.id.shareCanvas -> if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (managePermissions.isPermissionsGranted() == PackageManager.PERMISSION_GRANTED) {
+                    shareImage()
+                } else {
+                    managePermissions.checkPermissions()
+                }
+            } else {
                 shareImage()
             }
 

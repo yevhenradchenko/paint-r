@@ -48,7 +48,7 @@ class ManagePermissions(private val activity: MainActivity,
     private fun requestPermissions() {
         val permission = deniedPermission()
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
-            activity.toast("We need to get permissions to allow you yo use all functionality.")
+            activity.toast("We need to get permissions to allow you yo use all functionality, please go to application settings.")
         } else {
             ActivityCompat.requestPermissions(activity, PERMISSIONS.toTypedArray(), PERMISSIONS_REQUEST_CODE)
         }
