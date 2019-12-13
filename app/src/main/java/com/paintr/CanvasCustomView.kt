@@ -136,7 +136,6 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
 
             MotionEvent.ACTION_UP -> {
                 path.lineTo(currentX, currentY)
-                extraCanvas?.drawPath(path, paint)
                 paths.add(Triple(path, drawingColor, strokeDrawWidth))
                 path = Path()
             }
