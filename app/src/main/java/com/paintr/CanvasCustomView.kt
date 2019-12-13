@@ -27,8 +27,6 @@ class CanvasCustomView @JvmOverloads constructor(context: Context, attrs: Attrib
     private val paths = ArrayList<Triple<Path, Int, Float>>()
     private val undonePaths = ArrayList<Triple<Path, Int, Float>>()
 
-    private val extraCanvas: Canvas? = null
-
     private var bitmapBackground: Bitmap? = null
 
     private var motionTouchEventX = 0f
